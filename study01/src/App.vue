@@ -15,6 +15,13 @@
     <ul>
       <li v-for="(item, index) in items" :key="index">{{ item }}</li>
     </ul>
+    <!-- 画像と入力フィールドを表示 -->
+    <div>
+      <!-- 画像のURLを動的に設定 -->
+      <img :src="imageUrl" alt="Image" />
+      <!-- 入力フィールドの初期値を動的に設定 -->
+      <input :value="inputText" />
+    </div>
   </div>
 </template>
 
@@ -35,7 +42,11 @@ export default {
       // 要素の表示/非表示を管理するフラグ
       isVisible: true,
       // リストに表示するアイテム
-      items: ['Apple', 'Banana', 'Orange']
+      items: ['Apple', 'Banana', 'Orange'],
+      // 画像のURLを保持
+      imageUrl: 'https://via.placeholder.com/150',
+      // 入力フィールドの初期テキスト
+      inputText: '初期テキスト'
     };
   },
   // メソッドを定義
