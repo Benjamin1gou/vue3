@@ -22,6 +22,12 @@
       <!-- 入力フィールドの初期値を動的に設定 -->
       <input :value="inputText" />
     </div>
+    <div>
+      <!-- v-modelで双方向データバインディング: テキスト入力をリアルタイムで反映 -->
+      <input v-model="inputText" placeholder="入力してください" />
+      <!-- 入力されたテキストを表示 -->
+      <p>入力されたテキスト: {{ inputText }}</p>
+    </div>
   </div>
 </template>
 
@@ -46,7 +52,7 @@ export default {
       // 画像のURLを保持
       imageUrl: 'https://via.placeholder.com/150',
       // 入力フィールドの初期テキスト
-      inputText: '初期テキスト'
+      inputText: ''
     };
   },
   // メソッドを定義
