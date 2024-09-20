@@ -5,10 +5,17 @@
     <!-- 子コンポーネントにメッセージをプロパティとして渡す -->
     <MyComponent :text="message" />
   </div>
+
+  <div>
+    <!-- 子コンポーネントからイベント "sendData" を受け取り、親コンポーネントのメソッド receiveData を呼び出す -->
+    <MyComponent @sendData="receiveData" />
+    <!-- 子コンポーネントから受け取ったデータを表示 -->
+    <p>子コンポーネントから受け取ったデータ: {{ receivedData }}</p>
+  </div>
 </template>
 
 <script>
-// 子コンポーネントMyComponentをインポート
+// 子コンポーネントMyComponentをインポーネント
 import MyComponent from './components/TestComponent.vue';
 
 export default {
@@ -20,8 +27,17 @@ export default {
   data() {
     return {
       // 親コンポーネントから渡すメッセージ
-      message: '親コンポーネントからのメッセージ'
+      message: '親コンポーネントからのメッセージ',
+      // 子コンポーネントから受け取るデータ
+      receivedData: ''
     };
+  },
+  // メソッドを定義
+  methods: {
+    // 子コンポーネントからのデータを受け取るメソッド
+    receiveData(data) {
+      this.receivedData = data;
+    }
   }
 };
 </script>
