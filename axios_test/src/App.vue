@@ -1,26 +1,42 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <h1>APIからのデータ</h1>
+    <!-- エラーメッセージがある場合は表示 -->
+    <p v-if="errorMessage">{{ errorMessage }}</p>
+    <!-- エラーメッセージがない場合は取得したデータをリスト表示 -->
+    <ul v-else>
+      <li v-for="item in data" :key="item.id">{{ item.title }}</li>
+    </ul>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// axiosライブラリをインポート
+import axios from 'axios';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  // コンポーネントのデータを定義
+  data() {
+    return {
+      // APIから取得したデータを格納する配列
+      data: [],
+      // エラーメッセージを格納するプロパティ
+      errorMessage: null
+    };
+  },
+  // コンポーネントがマウントされた時に実行される処理
+  mounted() {
+    // axiosを使ってAPIからデータを取得
+    axios.get('https://jsonplaceholder.typicode.com/posts')
+      .then(response => {
+        // 取得したデータをdataプロパティにセット
+        this.data = response.data;
+      })
+      .catch(err => {
+        // エラーが発生した場合の処理
+        console.error(err);  // ここでエラー内容をログに出力
+        this.errorMessage = 'データの取得に失敗しました'; // エラーメッセージを設定
+      });
   }
-}
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
