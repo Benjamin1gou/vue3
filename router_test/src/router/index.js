@@ -2,13 +2,15 @@ import { createRouter, createWebHistory } from 'vue-router';
 // HomePageとAboutPageコンポーネントをインポート
 import Home from '../views/HomePage.vue';
 import About from '../views/AboutPage.vue';
+import UserProfile from '../views/UserPage.vue';
 
 // ルート定義
 const routes = [
   // ホームページのルート設定
   { path: '/', name: 'Home', component: Home },
   // Aboutページのルート設定。requiresAuthメタフィールドを追加して認証が必要であることを示す
-  { path: '/about', name: 'About', component: About, meta: { requiresAuth: true } }
+  { path: '/about', name: 'About', component: About, meta: { requiresAuth: true } },
+  { path: '/user/:id', name: 'User',  component: UserProfile }
 ];
 
 // Vue Routerのインスタンスを作成
